@@ -23,7 +23,7 @@ public class PersonalInfo extends AbstractEntity{
     @Column(name = "identity_number", unique = true, nullable = false)
     private String identityNumber;
 
-    @Column(name = "place_if_birth", nullable = false)
+    @Column(name = "place_of_birth", nullable = false)
     private String placeOfBirth;
 
     @Column(name = "municipality_of_registration", nullable = false)
