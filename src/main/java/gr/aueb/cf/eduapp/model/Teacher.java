@@ -33,6 +33,11 @@ public class Teacher extends AbstractEntity {
     private String lastname;
 
     @Setter(AccessLevel.PACKAGE)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Setter(AccessLevel.PACKAGE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
@@ -40,6 +45,16 @@ public class Teacher extends AbstractEntity {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_info_id")
     private PersonalInfo personalInfo;
+
+    public void addUser(User user) {
+        this.user = user;
+        user.setTeacher(this);
+    }
+
+    public void removeUser(User user) {
+        this.user = null;
+        user.setTeacher(null);
+    }
 
     @Override
     public boolean equals(Object o) {
