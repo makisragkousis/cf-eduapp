@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -39,4 +40,15 @@ public class Teacher extends AbstractEntity {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_info_id")
     private PersonalInfo personalInfo;
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Teacher teacher)) return false;
+        return Objects.equals(getVat(), teacher.getVat());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getVat());
+    }
 }
