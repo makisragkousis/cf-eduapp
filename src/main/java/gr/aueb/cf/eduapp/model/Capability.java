@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -32,5 +33,16 @@ public class Capability {
 
     public Set<Role> getAllRoles() {
         return Set.copyOf(roles);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Capability that)) return false;
+        return Objects.equals(getName(), that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getName());
     }
 }

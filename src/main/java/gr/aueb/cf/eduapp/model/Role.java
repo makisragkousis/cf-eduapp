@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -34,6 +35,11 @@ public class Role {
     )
     private Set<Capability> capabilities = new HashSet<>();
 
+    @Getter(AccessLevel.PACKAGE)
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+    private Set<User> users = new HashSet<>();
+
      public Set<Capability> getAllCapabilities() {
          return Set.copyOf(capabilities);
      }
@@ -47,4 +53,15 @@ public class Role {
          capabilities.remove(capability);
          capability.getRoles().remove(this);
      }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Role role)) return false;
+        return Objects.equals(getName(), role.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getName());
+    }
 }
