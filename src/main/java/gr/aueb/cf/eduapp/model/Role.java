@@ -40,6 +40,10 @@ public class Role {
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
 
+    public Set<User> getAllUsers() {
+        return Set.copyOf(users);
+    }
+
      public Set<Capability> getAllCapabilities() {
          return Set.copyOf(capabilities);
      }
@@ -52,6 +56,20 @@ public class Role {
      public void removeCapability(Capability capability) {
          capabilities.remove(capability);
          capability.getRoles().remove(this);
+     }
+
+     public void addUser(User user) {
+         users.add(user);
+         user.setRole(this);
+     }
+
+     public void removeUser(User user) {
+         users.remove(user);
+         user.setRole(null);
+     }
+
+     public void addUsers(Set<User> users) {
+         users.forEach(this::addUser);
      }
 
     @Override
