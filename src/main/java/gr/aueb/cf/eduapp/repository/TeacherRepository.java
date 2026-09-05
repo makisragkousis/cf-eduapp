@@ -24,5 +24,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long>, JpaSpec
     @EntityGraph(attributePaths = {"personalInfo", "region"})
     Page<Teacher> findAllByDeletedFalse(Pageable pageable);
 
-    boolean existsByUuidAndUser_Uuid(UUID teacherUuid, UUID userUui);
+    boolean existsByUuidAndUser_Uuid(UUID teacherUuid, UUID userUuid);
 }
