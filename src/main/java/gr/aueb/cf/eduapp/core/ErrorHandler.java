@@ -19,7 +19,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorResponseDTO> handleEntityNotFoundException(EntityNotFoundException e) {
         log.warn("Entity not found. Message={}", e.getMessage());
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)   // 404 Not Found
+                .status(HttpStatus.NOT_FOUND)       // 404 Not Found
                 .body(new ErrorResponseDTO(e.getCode(), e.getMessage()));
     }
 
@@ -35,7 +35,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorResponseDTO> handleEntityAlreadyExistsException(EntityAlreadyExistsException e) {
         log.warn("Entity already exists. Message={}", e.getMessage());
         return ResponseEntity
-                .status(HttpStatus.CONFLICT)     // 409 Bad Request
+                .status(HttpStatus.CONFLICT)        // 409 Conflict
                 .body(new ErrorResponseDTO(e.getCode(), e.getMessage()));
     }
 }
