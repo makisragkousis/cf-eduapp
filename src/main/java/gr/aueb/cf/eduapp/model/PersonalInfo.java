@@ -34,11 +34,11 @@ public class PersonalInfo extends AbstractEntity{
     @JoinColumn(name = "amka_file_id")
     private Attachment amkaFile;
 
-    public void addAmkaFile(Attachment amkaFile) {
+    public void addAmkaFile() {
         this.amkaFile = amkaFile;
     }
 
-    public void removeAmkaFile(Attachment amkaFile) {
+    public void removeAmkaFile() {
         this.amkaFile = null;
     }
 }
