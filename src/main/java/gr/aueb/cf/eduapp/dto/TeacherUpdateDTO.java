@@ -31,10 +31,10 @@ public record TeacherUpdateDTO(
 
         @NotNull
         @Valid
-        UserInsertDTO userUpdateDTO,
+        UserUpdateDTO userUpdateDTO,
 
         @NotNull
         @Valid
-        PersonalInfoInsertDTO personalInfoUpdateDTO
+        PersonalInfoUpdateDTO personalInfoUpdateDTO
 ) {
 }
