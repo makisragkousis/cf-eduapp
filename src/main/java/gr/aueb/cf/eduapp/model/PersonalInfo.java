@@ -34,7 +34,7 @@ public class PersonalInfo extends AbstractEntity{
     @JoinColumn(name = "amka_file_id")
     private Attachment amkaFile;
 
-    public void addAmkaFile() {
+    public void addAmkaFile(Attachment amkaFile) {
         this.amkaFile = amkaFile;
     }
 
