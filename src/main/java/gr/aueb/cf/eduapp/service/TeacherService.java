@@ -58,7 +58,7 @@ public class TeacherService implements ITeacherService {
     public TeacherReadOnlyDTO saveTeacher(TeacherInsertDTO dto)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException {
 
-        if (dto.vat() != null && teacherRepository.findByVat(dto.vat()).isPresent()) {
+        if (dto.vat() != null && isTeacherExistsByVat(dto.vat())) {
             throw new EntityAlreadyExistsException("Teacher", "Teacher with vat=" + dto.vat() + " already exists");
         }
 
@@ -310,6 +310,11 @@ public class TeacherService implements ITeacherService {
         log.debug("Filtered and paginated were returned successfully with page={}, size={}",
                 pageable.getPageNumber(), pageable.getPageSize());
         return filtered.map(mapper::mapToTeacherReadonlyDTO);
+    }
+
+    @Override
+    public boolean isTeacherExistsByVat(String vat) {
+        return teacherRepository.findByVat(vat).isPresent();
     }
 
     private Page<TeacherReadOnlyDTO> singleResultPage(Teacher teacher, Pageable pageable) {
