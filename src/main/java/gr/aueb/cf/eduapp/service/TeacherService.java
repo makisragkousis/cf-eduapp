@@ -181,13 +181,20 @@ public class TeacherService implements ITeacherService {
             teacher.setVat(dto.vat());
         }
 
-        if (!teacher.getPersonalInfo().getIdentityNumber().equals(dto.personalInfoUpdateDTO().identityNumber())) {
+        if (!Objects.equals(dto.personalInfoUpdateDTO().identityNumber(), teacher.getPersonalInfo().getIdentityNumber())) {
             if (personalInfoRepository.findByIdentityNumber(dto.personalInfoUpdateDTO().identityNumber()).isPresent()) {
-                throw new EntityAlreadyExistsException("","Teacher with identity number "
-                        + dto.personalInfoUpdateDTO().identityNumber()
-                        + " already exists");
+                throw new EntityAlreadyExistsException("Teacher","Teacher with identity number "
+                        + dto.personalInfoUpdateDTO().identityNumber() + " already exists");
             }
             teacher.getPersonalInfo().setIdentityNumber(dto.personalInfoUpdateDTO().identityNumber());
+        }
+
+        if (!Objects.equals(dto.personalInfoUpdateDTO().amka(), teacher.getPersonalInfo().getAmka())) {
+            if (personalInfoRepository.findByAmka(dto.personalInfoUpdateDTO().amka()).isPresent()) {
+                throw new EntityAlreadyExistsException("Teacher", "Teacher with amka "
+                        + dto.personalInfoUpdateDTO().amka() + " already exists");
+            }
+            teacher.getPersonalInfo().setAmka(dto.personalInfoUpdateDTO().amka());
         }
 
         if (!Objects.equals(dto.regionId(), teacher.getRegion().getId())) {
