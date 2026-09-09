@@ -112,7 +112,7 @@ public class TeacherService implements ITeacherService {
             throws FileUploadException, EntityNotFoundException {
 
         Teacher teacher = teacherRepository.findByUuid(uuid).orElseThrow(()
-                -> new EntityNotFoundException("Teacher", "Teacher with uuid=" + uuid));
+                -> new EntityNotFoundException("Teacher", "Teacher with uuid=" + uuid + " does not exist"));
 
         PersonalInfo personalInfo = teacher.getPersonalInfo();
 
