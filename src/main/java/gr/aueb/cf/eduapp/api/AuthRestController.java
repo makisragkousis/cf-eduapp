@@ -5,6 +5,7 @@ import gr.aueb.cf.eduapp.dto.AuthenticationRequestDTO;
 import gr.aueb.cf.eduapp.dto.AuthenticationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ public class AuthRestController {
     public ResponseEntity<AuthenticationResponseDTO> authenticate(
             @RequestBody AuthenticationRequestDTO authenticationRequestDTO) {
 
-        AuthenticationResponseDTO responseDTO = authenticationService.authenticate(authenticationRequestDTO);
+        AuthenticationResponseDTO responseDTO = authenticationService
+                .authenticate(authenticationRequestDTO);
         return  ResponseEntity.ok(responseDTO);
     }
 }
