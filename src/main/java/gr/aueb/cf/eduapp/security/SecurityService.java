@@ -13,9 +13,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class SecurityService {
 
-    private final TeacherRepository teacherRepository;
+    private final TeacherRepository  teacherRepository;
 
-    public boolean isOwnTeacherProfile(UUID teacherUUID, Authentication authentication) throws EntityNotFoundException {
+    public boolean isOwnTeacherProfile(UUID teacherUUID, Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
 
         return teacherRepository.existsByUuidAndUser_Uuid(teacherUUID, principal.getUuid());
